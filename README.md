@@ -69,5 +69,5 @@ git push
 ```
 - Go to GitHub, go to your fork of `real-analysis`, and on the left hand side
 you can select a branch. Select the branch you want to have added, and you should
-see a green button asking you to make a pull request with the changes. Do this,
+see a button asking you to make a pull request with the changes. Do this,
 and it will notify me that you have things you want to merge.
