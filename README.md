@@ -10,9 +10,9 @@ You should have gotten a link to clone the repository,
 like `git@github.com:USERNAME/real-analysis.git` but with
 your login name instead of USERNAME
 
+**Note that GitHub offers a Graphical Client you can use. I am giving advice based on using the terminal / shell.**
 
 ## Setting up the fork on your computer (assumes OSX)
-Note that GitHub offers a Graphical Client you can use. I am giving advice based
 on using the terminal / shell:
 - In the _Finder_, make a folder somewhere you want to do your work in.
 - In the _Terminal_, `cd` to that folder.
