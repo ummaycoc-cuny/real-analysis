@@ -24,6 +24,7 @@ This will make the folder `real-analysis` in the folder you navigated
 to with `cd` above.
 - Set up your local repository to get updates from the original one.
 ```
+cd real-analysis
 git add remote ummaycoc git@github.com:ummaycoc-cuny/real-analysis.git
 git fetch ummaycoc
 git checkout master
