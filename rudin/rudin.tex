@@ -4,15 +4,11 @@
 \usepackage{amssymb}
 \usepackage{mathrsfs}
 \usepackage{fancyheadings}
-\usepackage{graphicx}
 \usepackage[top=1.25in, bottom=1.25in, left=1.0in, right=1.0in]{geometry}
 \usepackage{hyperref}
-\usepackage{tikz-cd}
 
 \pagestyle{fancy}
-
 \lhead{Papa Rudin Notes}
-
 \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue} 
 \setcounter{tocdepth}{3}
 
@@ -37,6 +33,11 @@
 \newcommand{\remark}{\item}
 \newcommand{\powerset}{\mathscr{P}}
 
+% https://tex.stackexchange.com/questions/88281/how-to-change-font-for-the-integral-symbol
+\DeclareSymbolFont{rudin-largesymbols}{OMX}{mdbch}{m}{n}
+\DeclareMathSymbol{\intop}{\mathop}{rudin-largesymbols}{82}
+\DeclareMathOperator{\vol}{vol\,}
+
 \begin{document}
 \pagenumbering{roman}
 \tableofcontents
@@ -46,15 +47,21 @@
 
 \section{Abstract Integration}
 
+% 1.1
+\steptopic
+
 \material{The Concept of Measurability}
 
-% 1.1
 % 1.2
-\steptopic[2]
+\begin{topic}{Definition}
+\remark $\tau \subseteq \powerset(X)$, containing both $\emptyset$ and $X$, is a \term{topology} if it is closed under finite intersections, and closed under arbitrary unions.
+\remark $(X, \tau)$ is a \term{topological space} and the members of $\tau$ are \term{open sets}.
+\remark $f : (X, \tau_X) \to (Y, \tau_Y)$ is \term{continuous} if open sets have open preimages.
+\end{topic}
 
 % 1.3
 \begin{topic}{Definition}
-\remark $\mathfrak{M} \subseteq \powerset(X)$, containing $X$, is a $\sigma$-algebra if $\mathfrak{M}$ is closed under complementation and countable unions.
+\remark $\mathfrak{M} \subseteq \powerset(X)$, containing $X$, is a \term{$\sigma$-algebra} if $\mathfrak{M}$ is closed under complementation and countable unions.
 \remark $(X, \mathfrak{M})$ is a \term{measurable space}; elements of $\mathfrak{M}$ are \term{measurable sets}.
 \remark $f : (X, \mathfrak{M}) \to (Y, \tau)$ is \term{measurable} if open sets have measurable preimages ($\tau$ a topology).
 \end{topic}
@@ -237,7 +244,6 @@
 
 \material{Integration of Complex Functions on $(X, \mathfrak{M}, \mu)$}
 
-
 % 1.30
 \begin{topic}{Definition}
 \remark The \term{Lebesgue Integrable Functions} or \term{Summable Functions} with respect to $\mu$, denoted by $L^1(\mu)$ is the collection of all complex measurable functions $f$ on $X$ such that $\int_X |f|\,d\mu < \infty$.
@@ -312,5 +318,223 @@
 
 \newpage
 \section{Positive Borel Measures}
+
+\material{Vector Spaces}
+
+% 2.1
+\begin{topic}{Definition}
+\remark A \term{complex vector space} is one with complex scalars.
+\remark A function $\Lambda$ between vector spaces is a \term{linear transformation} if $\Lambda(\alpha x + \beta y) = \alpha \Lambda x + \beta \Lambda y$.
+\remark A \term{linear functional} is a linear transformation where the codomain is the field of scalars of the domain.
+\end{topic}
+
+% 2.2
+\begin{topic}{Integration as a Linear Functional}
+\remark For any positive measure $\mu$, $f \mapsto \int_X f\,d\mu$ is a linear functional on $L^1(\mu)$.
+\remark If $g$ is a bounded measurable function then $f \mapsto \int_X fg\,d\mu$ is a linear functional on $L^1(\mu)$.
+\remark A \term{positive linear functional} is a linear functional $\Lambda$ such that $\Lambda f \geq 0$ whenever $f \geq 0$.
+\remark If $C$ is the vector space of continuous complex functions on $[0, 1]$ then $$\Lambda f = \int_0^1 f(x)\,dx$$ is a positive linear functional on $C$ (with the integral being the Riemann integral).
+\end{topic}
+
+
+\material{Topological Preliminaries}
+
+% 2.3
+\begin{topic}{Definitions}
+\remark $E$ is \term{closed} if its complement is open.
+\remark The \term{closure} of $E$, denoted $\overline{E}$, is the smallest closed set containing $E$.
+\remark $K \subseteq X$ is \term{compact} if every open cover of $K$ contains a finite subcover.
+\remark A \term{neighborhood} of $p \in X$ is any open set containing $p$.
+\remark $X$ is \term{Hausdorff} if any two $p \neq q$ can be separated by open sets.
+\remark $X$ is \term{locally compact} if every points has a neighborhood with compact closure.
+\remark Recall Heine-Borel: Subsets of Euclidean space are compact exactly when they are closed and bounded. Thus $\mathbb{R}^n$ is locally compact.
+\remark Recall: Every metric space is Hausdorff.
+\end{topic}
+
+% 2.4
+\begin{topic}{Closed Subsets of Compact Sets}
+\remark $F \subseteq K$, $F$ closed, $K$ compact. Then $F$ is compact.
+\remark If $A \subseteq B$ and $B$ has compact closure then so does $A$.
+\end{topic}
+
+% 2.5
+\begin{topic}{Separating a Compact Set  from a Point}
+\remark If $X$ is Hausdorff with $K$ compact in $X$ then any $p \not\in K$ can be separated from $K$ by open sets.
+\end{topic}
+
+% 2.6
+\begin{topic}{Intersections of Compact Sets}
+\remark If $K_\alpha \subseteq X$ are compact, $X$ Hausdorff, and $\cap_\alpha K_\alpha = \emptyset$ then some finite subset has empty intersection.
+\end{topic}
+
+% 2.7
+\begin{topic}{Sandwiching Sets}
+\remark If $U$ is open in $X$, Hausdorff, and $K \subseteq U$ is compact then there exists $V$, open, with $K \subseteq V \subseteq \overline{V} \subseteq U$.
+\end{topic}
+
+% 2.8
+\begin{topic}{Definition}
+\remark $f$ is \term{lower semicontinuous} if $f^{-1}((\alpha, \infty])$ is open.
+\remark $f$ is \term{upper semicontinuous} if $f^{-1}([\infty, \alpha))$ is open.
+\remark $\chi_U$ is lower semicontinuous if $U$ is open.
+\remark $\chi_F$ is upper semicontinuous if $F$ is closed.
+\remark The supremum of any collection of lower semicontinuous functions is again lower semicontinuous.
+\remark The infimum of any collection of upper semicontinuous functions is again upper semicontinuous.
+\end{topic}
+
+% 2.9
+\begin{topic}{Definition}
+\remark The \term{support} of $f : X \to \mathbb{C}$ is the closure of $f^{-1}(\mathbb{C} \setminus \{0\})$.
+\remark $C_c(X)$ is the vector space of functions with compact support.
+\end{topic}
+
+% 2.10
+\begin{topic}{Image of a Compact Set}
+\remark The continuous image of a compact set is compact.
+\remark The range of $f \in C_c(X)$ is compact subset of $\mathbb{C}$.
+\end{topic}
+
+% 2.11
+\begin{topic}{Notation}
+\remark $K \prec f$ means $K$ is compact, $0 \leq f(x) \leq 1$ and $f = 1$ on $K$.
+\remark $f \prec V$ means $V$ is open and $f$'s support lies in $V$.
+\remark $K \prec f \prec V$ combines the above.
+\end{topic}
+
+% 2.12
+\begin{topic}{Urysohn's Lemma}
+\remark For $K \subseteq V \subseteq X$ with $K$ compact, $V$ open, and both $X$ locally compact and Hausdorff, there exists $f \in C_c(X)$ with $K \prec f \prec V$.
+\remark In terms of characteristic functions this means there is a continuous $f$ with $\chi_K \leq f \leq \chi_V$.
+\end{topic}
+
+% 2.13
+\begin{topic}{Partition of Unity}
+\remark For $X$ locally compact and Hausdorff and $V_1, \ldots, V_n$ open in $X$ and $K \subseteq V_1 \cup \cdots \cup V_n$ is compact, there exists functions $h_i \prec V_i$ with $h_1 + \cdots + h_n = 1$ on $K$.
+\remark This is called a \term{partition of unity on $K$} subordinate to the cover $\{V_1, \ldots, V_n\}$.
+\end{topic}
+
+
+\material{The Riesz Representation Theorem}
+
+% 2.14
+\begin{topic}{The Riesz Representation Theorem}
+\remark For $X$ locally compact and Hausdorff with $\Lambda$ a positive linear functional on $C_c(X)$ there exists:
+\begin{enumerate}
+\item a $\sigma$-algebra $\mathfrak{M}$ containing all the Borel sets of $X$;
+\item a {\em unique} positive measure $\mu$ on $\mathfrak{M}$ representing $\Lambda$:
+\begin{itemize}
+\item $\Lambda f = \int_X f\,d\mu$ for all $f \in C_c(X)$
+\item $\mu(K) < \infty$ for any compact $K$
+\item $\mu(E) = \inf\,\{ \mu(V) : E \subseteq V,\;V\;\text{open}\}$ for all $E \in \mathfrak{M}$
+\item $\mu(E) = \sup\,\{ \mu(K) : K \subseteq E,\;K\;\text{compact}\}$ for every $E \in \mathfrak{M}$ open or $\mu(E) < \infty$
+\item $E \in \mathfrak{M}$, $\mu(E) = 0$ implies every subset of $E$ is in $\mathfrak{M}$.
+\end{itemize}
+\end{enumerate}
+\end{topic}
+
+
+\material{Regularity Properties of Borel Measures}
+
+% 2.15
+\begin{topic}{Definition}
+\remark $\mu$ is a \term{Borel measure} if it is defined on the Borel sets.
+
+Let $\mu$ be a positive Borel measure and $E \subseteq X$ be Borel. Then:
+\remark $E$ is \term{outer regular} if the infimum property in 2.14 holds.
+\remark $E$ is \term{inner regular} if the supremum property in 2.14 holds.
+\remark $E$ is \term{regular} if both hold.
+\end{topic}
+
+% 2.16
+\begin{topic}{Definition}
+\remark $E$ is \term{$\sigma$-compact} if it is the countable union of compact sets.
+\remark $E$ is \term{$\sigma$-finite} if it is the countable union of sets with finite measure.
+\end{topic}
+
+% 2.17
+\begin{topic}{Regularity of $\sigma$-Compact Spaces}
+\remark $X$ a locally compact, $\sigma$-compact Hausdorff space and $\mathfrak{M}, \mu$ are as in 2.14. Then:
+\begin{itemize}
+\item For $E \in \mathfrak{M}$, $\epsilon > 0$, there is $F \subseteq E \subseteq V$ with $F$ closed, $V$ open, and $\mu(V \setminus F) < \epsilon$.
+\item $\mu$ is a regular Borel measure on $X$.
+\item There exists an $F_\sigma A$ and a $G_\delta B$ with $A \subseteq E \subseteq B$ and $\mu(B \setminus A) = 0$.
+
+Thus, every $E \in \mathfrak{M}$ is the union of an $F_\sigma$ and a negligible set.
+\end{itemize}
+\end{topic}
+
+% 2.18
+\begin{topic}{Regularity in the Presence of $\sigma$-Compact Open Sets}
+\remark $X$ a locally compact Hausdorff space in which every open set is $\sigma$-compact. Then any positive Borel measure that is finite on compact sets is regular.
+\end{topic}
+
+
+\material{Lebesgue Measure}
+
+% 2.19
+\begin{topic}{Euclidean Spaces}
+\remark $\mathbb{R}^k$ is the \term{$k$-dimension Euclidean space} with all the familiar operations.
+\remark If $E \subseteq \mathbb{R}^k$ and $x \in \mathbb{R}^k$ then $E + x = \{ y + x : y \in E \}$ is a \term{translate} of $E$.
+\remark A \term{$k$-cell} is a set of the form $\{ (\xi_1, \ldots, \xi_k) \in \mathbb{R}^k : \alpha_i < \xi_i < \beta_i, 1 \leq i \leq k \}$. Either inequality may be replaced with $\leq$. The \term{volume} of a $k$-cell is $\vol(W) = \prod_{i=1}^k (\beta_i - \alpha_i)$.
+\remark If $a \in \mathbb{R}^k$ and $\delta > 0$ then a \term{$\delta$-box with corner at $a$} is $$Q(a, \delta) = \{ (\xi_1, \ldots, \xi_k) \in \mathbb{R}^k : \alpha_i \leq \xi_i < \alpha_i + \delta, 1 \leq i \leq k \}.$$
+\remark If $P_n$ are points whose coordinates are multiples of $2^{-n}$ and $\Omega_n$ are the $2^{-n}$ boxes with corners at the elements of $P_n$ then we use the following properties:
+\begin{itemize}
+\item $\Omega_n$ covers $\mathbb{R}^k$ disjointly.
+\item If $r < n$ and $Q^\prime \in \Omega_n$, $Q^{\prime\prime} \in \Omega_r$ then either $Q^\prime \subseteq Q^{\prime\prime}$ or $Q^\prime \cap Q^{\prime\prime} = \emptyset$.
+\item $\vol{Q} = 2^{-rk}$ for $Q \in \Omega_r$ and if $n > r$ then $|P_n \cap Q| = 2^{(n-r)k}$.
+\item Any non-empty open set is the countable disjoint union of elements of $\cup_{n=1}^\infty Q_n$.
+\end{itemize}
+\end{topic}
+
+% 2.20
+\begin{topic}{Existence of the Lebesgue Measure}
+\remark There exists $(\mathbb{R}^k, \mathfrak{M}, m)$ such that
+\begin{itemize}
+\item $m(W) = \vol(W)$ for every $k$-cell $W$.
+\item $\mathfrak{M}$ contains the Borel sets of $\mathbb{R}^k$
+\item $E \in \mathfrak{M}$ iff $A \subseteq E \subseteq B$ with $A$ is $F_\sigma$, $B$ is $G_\delta$, and $m(B \setminus A) = 0$.
+\item $m$ is regular.
+\item $m(x + E) = m(E)$ for all $E \in \mathfrak{M}$ and $x \in \mathbb{R}^k$.
+\item If $\mu$ is any positive translation-invariant Borel measure on $\mathbb{R}^k$ which is finite on compact sets then $\mu(E) = cm(E)$ for some $c \in \mathbb{R}$ and all Borel sets $E$.
+\item $m(T(E)) = \Delta(T)m(E)$, $\Delta(T) \in \mathbb{R}$, for every linear transformation $T : \mathbb{R}^k \to \mathbb{R}^k$ and $E \in \mathfrak{M}$. More specifically, $\Delta(T) = 1$ if $T$ is a rotation.
+\end{itemize}
+\remark Elements of $\mathfrak{M}$ are \term{Lebesgue measurable} sets and $m$ is the \term{Lebesgue measure} on $\mathbb{R}^k$.
+\end{topic}
+
+% 2.21
+\begin{topic}{Remarks}
+\remark If $m$ is the Lebesgue measure on $\mathbb{R}^k$ we write $L^1(\mathbb{R}^k)$ instead of $L^1(m)$.
+\remark Instead of $f \in L^1$ on $E$ we write $f \in L^1(E)$ (in the measure space with $m$ restricted to subsets of $E$).
+\remark If $I$ is an interval in $\mathbb{R}$ and $f \in L^1(I)$ we write $\int_a^b f(x)\,dx$ instead of $\int_I f\,dm$.
+\remark If $f$ is continuous on $[a, b]$ then the Riemann and Lebesgue integrals agree.
+\remark Most sets are {\em not} Borel sets.
+\end{topic}
+
+% 2.22
+\begin{topic}{Sufficient Condition for Measure Zero}
+\remark If $A \subseteq \mathbb{R}$ and every subset of $A$ is Lebesgue measurable then $m(A) = 0$.
+\remark Every set of positive measure has unmeasurable subsets.
+\end{topic}
+
+% 2.23
+\begin{topic}{Determinants}
+\remark The $\Delta(T)$ in 2.20 is $|\det T\,|$.
+\end{topic}
+
+
+\material{Continuity Properties of Measurable Functions}
+
+We assume in this section that $\mu$ is a measure on a locally compact Hausdorff space with the properties listed in 2.14 -- $\mu$ could be the Lebesgue measure on some $\mathbb{R}^k$.
+
+% 2.24
+\begin{topic}{Lusin's Theorem}
+\remark $f$ complex measurable, $\mu(A) < \infty$, and $f = 0$ outside $A$. Then for $\epsilon > 0$ there exists $g \in C_c(X)$ with $$\mu(\{x : f(x) \neq g(x)\}) < \epsilon.$$ We may pick $g$ so that $$\sup_{x \in X} |g(x)| \leq \sup_{x \in X} |f(x)|.$$
+\remark If $|f| \leq 1$ then there is a sequence $g_n \in C_c(X)$, $|g_n| \leq 1$, with $$f(x) = \lim_{n \to \infty} g_n(x)~~\text{a.e.}$$
+\end{topic}
+
+% 2.25
+\begin{topic}{Vitali-Carath\'eodory Theorem}
+\remark If $f \in L^1(\mu)$ is real valued and $\epsilon > 0$ then there exists $u$, upper semicontinuous and bounded from above, and $v$, lower semicontinuous and bounded from below, such that $u \leq f \leq v$ and $\int_X (v - u)\,d\mu < \epsilon$.
+\end{topic}
 
 \end{document}
