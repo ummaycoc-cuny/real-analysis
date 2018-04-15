@@ -539,4 +539,135 @@ We assume in this section that $\mu$ is a measure on a locally compact Hausdorff
 \remark If $f \in L^1(\mu)$ is real valued and $\epsilon > 0$ then there exists $u$, upper semicontinuous and bounded from above, and $v$, lower semicontinuous and bounded from below, such that $u \leq f \leq v$ and $\int_X (v - u)\,d\mu < \epsilon$.
 \end{topic}
 
+
+\newpage
+\section{$L^p$-Spaces}
+
+\material{Convex Functions and Inequalities}
+
+% 3.1
+\begin{topic}{Definition}
+\remark $\varphi$ is \term{convex} on $(a, b)$ if $x, y \in (a, b)$ and $\lambda \in [0, 1]$ imply $$\varphi((1 - \lambda)x + \lambda y) \leq (1 - \lambda)\varphi(x) + \lambda\varphi(y).$$ That is, the segment between $(x, \varphi(x))$ and $(y, \varphi(y))$ lies above the graph of $\varphi$.
+\remark The above is equivalent to $a < s < t < u < b$ implying $$\dfrac{\varphi(t) - \varphi(s)}{t - s} \leq \dfrac{\varphi(u) - \varphi(t)}{u - t}.$$
+\note The mean value theorem for differentiation with the above imply that $\varphi$, real differentiable, is convex in $(a, b)$ iff $a < s < t < b$ implies $\varphi^\prime(s) \leq \varphi^\prime(t)$.
+\end{topic}
+
+% 3.2
+\begin{topic}{Convexity Implies Continuity}
+\remark If $\varphi$ is convex on $(a, b)$ then $\varphi$ is continuous on $(a, b)$.
+\note This relies on the fact that we are working on an {\em open} segment.
+\end{topic}
+
+% 3.3
+\begin{topic}{Jensen's Inequality}
+\remark $\mathfrak{M}$ a $\sigma$-algebra on $\Omega$, $\mu$ a positive measure on it such that $\mu(\Omega) = 1$. If $f \in L^1(\mu)$ is real with $f(\Omega) \subseteq (a, b)$ and $\varphi$ is convex on $(a, b)$ then $$\varphi\left(\int_\Omega f\,d\mu\right) \leq \int_\Omega (\varphi \circ f)\,d\mu.$$
+\note $a = -\infty$ or $b = \infty$ are not excluded values.
+\note If $\varphi \circ f \not\in L^1(\mu)$ then the integral has value $+\infty$ (see 1.31).
+\example For $\varphi(x) = e^x$ we get $$\exp\left\{\int_\Omega f\,d\mu\right\} \leq \int_\Omega e^f\,d\mu.$$
+\example If $\Omega = \{ p_1, \ldots, p_n \}$ and $\mu(\{p_i\}) = 1/n$, $f(p_i) = x_i$ then the example 1 becomes: $$\exp\left\{ \dfrac{1}{n}\sum_{i=1}^n x_i \right\} \leq \dfrac{1}{n}\sum_{i=1}^n e^{x_i}$$ for real $x_i$. Setting $y_i = e^{x_i}$ we can relate the arithmetic and geometric means of $n$ positive numbers: $$\left(\prod_{i=1}^n y_i\right)^{1/n} \leq \dfrac{1}{n}\sum_{i=1}^n y_i.$$ Given this, it is clear why $$\exp\left\{ \int_\Omega \log g\,d\mu \right\} \leq \int_\Omega g\,d\mu$$ are called the arithmetic and geometric means of the positive function $g$.
+\example If $\mu(\{p_i\}) = \alpha_i > 0$ with $\sum \alpha_i = 1$ then we get a more general version of the above: $$\prod_{i=1}^n y_i^{\alpha_i} \leq \sum_{i=1}^n \alpha_i y_i.$$
+\end{topic}
+
+% 3.4
+\begin{topic}{Definition}
+\remark $p, q \in (1, \infty)$ are \term{conjugate exponents} if $p + q = pq$ (or, equivalently, $p^{-1} + q^{-1} = 1$).
+\remark $p \to 1$ forces $q \to \infty$ and so $1$ and $\infty$ are regarded as conjugate exponents.
+\remark Many denote $p$'s conjugate exponent by $p^\prime$.
+\end{topic}
+
+% 3.5
+\begin{topic}{H\"older and Minkowski's Inequalities}
+\setup $p$ and $q$ are conjugate exponents with $p \in (1, \infty)$ and $f$ and $g$ are measurable with range in $[0, \infty]$:
+\remark H\"older's inequality: $$\int_X fg\,d\mu \leq \left\{\int_X f^p\,d\mu\right\}^{1/p} \left\{\int_X g^q\,d\mu\right\}^{1/q}.$$ If $p = q = 2$ then this is called Schwarz's inequality.
+\remark Minkowski's inequality: $$\left\{\int_X (f+g)^p\,d\mu\right\}^{1/p} \leq \left\{\int_X f^p\,d\mu\right\}^{1/p} + \left\{\int_X g^p\,d\mu\right\}^{1/p}.$$
+\note Assuming the right hand side of H\"older's inequality has only finite factors, equality holds if and only if there are constants $\alpha$ and $\beta$, not both zero, such that $\alpha f^p = \beta g^q$ a.e.
+\end{topic}
+
+
+\material{The $L^p$-spaces}
+For this section, let $X$ be arbitrary and $\mu$ a positive measure.
+
+% 3.6
+\begin{topic}{Definition}
+\remark If $0 \leq p \leq \infty$ and $f$ is a complex measurable function, then the \term{$L^p$-norm} of $f$ is $$\|f\|_p = \left\{\int_X |f|^p\,d\mu\right\}^{1/p}.$$ $L^p(\mu)$ is the collection of all $f$ for which $\|f\|_p < \infty$ and is called the \term{$L^p$-space} of $X$.
+\remark If $u$ is the Lebesgue measure on $\mathbb{R}^k$ then we write $L^p(\mathbb{R}^k)$ instead of $L^p(\mu)$.
+\remark If $\mu$ is the counting measure on a countable set $A$ we denote the $L^p$-space by $\ell^p(A)$ or just $\ell^p$. $x \in \ell^p$ is a sequence $x = \{\xi_n\}$ and $$\|x\|_p = \left\{\sum_{n=1}^\infty |\xi|^p\right\}^{1/p}.$$
+\end{topic}
+
+% 3.7
+\begin{topic}{Definition}
+\remark For $g : X \to [0, \infty]$ measurable, let $S$ be the set such that $\mu(g^{-1}((\alpha, \infty])) = 0$. If $S = \emptyset$ then set $\beta = \infty$, else $\beta = \inf S$. Since the countable union of sets of measure zero is a set of measure zero and $$g^{-1}((\beta, \infty]) = \bigcup_{n=1}^\infty g^{-1}\left(\left(\beta + \dfrac{1}{n}, \infty\right]\right),$$ $\beta \in S$. $\beta$ is the \term{essential supremum} of $g$.
+\remark If $f$ is a complex measurable function then $\|f\|_\infty$ is the essential supremum of $|f|$. $L^\infty(\mu)$ is the set of all $f$ with $\|f\|_\infty < \infty$, it's members called the \term{essentially bounded} measurable functions on $X$.
+\remark $L^\infty(\mathbb{R}^k)$ is the class of Lebesgue measure essentially bounded functions on $\mathbb{R}^k$.
+\remark $\ell^\infty(A)$ is the class of bounded functions on $A$.
+\note $|f(x)| \leq \lambda$ holds almost everywhere iff $\lambda \geq \|f\|_\infty$.
+\end{topic}
+
+% 3.8
+\begin{topic}{H\"older's Inequality With $L^p$-norms}
+\remark If $p$ and $q$ are conjugate exponents, $1 \leq p \leq \infty$, with $f \in L^p(\mu)$ and $g \in L^q(\mu)$ then $fg \in L^1(\mu)$ and $\|fg\|_1 \leq \|f\|_p \|g\|_q$.
+\end{topic}
+
+% 3.9
+\begin{topic}{Minkowski's Inequality With $L-p$-norms}
+\remark If $1 \leq p \leq \infty$ and $f, g \in L^p(\mu)$ then $f + g \in L^p(\mu)$ and $\|f + g\|_p \leq \|f\|_p + \|g\|_p$.
+\end{topic}
+
+% 3.10
+\begin{topic}{Remarks}
+\remark $L^p(\mu)$ is a complex vector space.
+\remark Triangle inequality holds: $\|f - h\|_p \leq \|f - g\|_p + \|g - h\|_p$.
+\note If $f \sim g$ (see 1.35) then $\|f - g\|_p = 0$.
+\remark $L^p(\mu)$ is a complete metric space if we pass to equivalence classes under $\sim$.
+\end{topic}
+
+% 3.11
+\begin{topic}{Completeness of $L^p(\mu)$}
+\remark $L^p(\mu)$ is complete for every $1 \leq p \leq \infty$ and every positive measure $\mu$.
+\end{topic}
+
+% 3.12
+\begin{topic}{Pointwise Convergence of Cauchy Subsequences}
+\remark For $1 \leq p \leq \infty$ and $f_n \to f$ Cauchy in $L^p(\mu)$, $\{f_n\}$ has a subsequence converging pointwise to $f$ a.e.
+\end{topic}
+
+% 3.13
+\begin{topic}{Density of (some) Simple Functions}
+\remark For $1 \leq p < \infty$, the set of all complex, measurable, simple functions $s$ with $\mu(\{x : s(x) \neq 0\}) < \infty$ is dense in $L^p(\mu)$.
+\end{topic}
+
+
+\material{Approximation by Continuous Functions}
+For this section $X$ is locally compact and Hausdorff, $\mu$ a measure on $\sigma$-algebra with the features in 2.14.
+
+% 3.14
+\begin{topic}{Density of $C_c(X)$}
+\remark $C_c(X)$ is dense in $L^p(\mu)$ for $1 \leq p < \infty$.
+\end{topic}
+
+% 3.15
+\begin{topic}{Remarks}
+\remark $C_c(\mathbb{R}^k)$ has a metric that does not need to pass to equivalence classes.
+\remark Likewise, the essential supremum there is the same as the supremum: $\|f\|_\infty = \sup_{x \in \mathbb{R}^k} |f(x)|$.
+\remark If $1 \leq p < \infty$ then 3.14 gives $C_c(\mathbb{R}^k)$ is dense in $L^p(\mathbb{R}^k)$, which is complete by 3.11. $L_p(\mathbb{R}^k)$ is the completion of $C_c(\mathbb{R}^k)$ with respect to the $L^p(\mathbb{R}^k)$ metric.
+\note Keep in mind that we are having {\em different} completions of the same set under different metrics.
+\remark If the distance between $f, g \in C_c(\mathbb{R}^1)$ is given by $\int_{-\infty}^\infty |f(t) - g(t)|\,dt$ then the completion of the resulting metric space is the space of equivalence classes (under $\sim$) of Lebesgue integrable functions.
+\note Important that the completion of functions on $\mathbb{R}^k$ are again functions on $\mathbb{R}^k$.
+\remark The $L^\infty$-completion is $C_0(\mathbb{R}^k)$ of functions which vanish at infinity (see below).
+\end{topic}
+
+\noindent {\bf Reminder:} For 3.16 and 3.17, please remember in this section that $X$ is {\bf locally compact} and {\bf Hausdorff}.
+
+% 3.16
+\begin{topic}{Definition}
+\remark The complex function $f$ \term{vanishes at infinity} if for $\epsilon > 0$ there is a $K$, compact, with $|f| < \epsilon$ on $K^c$.
+\remark $C_0(X)$ is the class of all continuous functions $f$ on $X$ which vanish at infinity.
+\remark $C_c(X) \subseteq C_0(X)$ with equality when $X$ is compact, in which case $C(X)$ is used for either.
+\end{topic}
+
+% 3.17
+\begin{topic}{}
+\remark $C_0(X)$ is the completion of $C_c(X)$ relative to the supremum norm metric: $\|f\| = \sup_{x \in X} |f(x)|$.
+\end{topic}
+
 \end{document}
