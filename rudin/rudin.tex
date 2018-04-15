@@ -15,6 +15,7 @@
 \newcounter{topicnumber}[section]
 \renewcommand{\thesubsubsection}{\thesection.\thetopicnumber}
 \setcounter{tocdepth}{2}
+\newcounter{examplenumber}[topicnumber]
 
 \newcommand{\steptopic}[1][1]{\addtocounter{topicnumber}{#1}}
 \newcommand{\material}[1]{%
@@ -33,7 +34,10 @@
 \newcommand{\setup}{\item[\null]}
 \newcommand{\remark}{\item}
 \newcommand{\note}{\item[{\em Note:}]}
-\newcommand{\example}{\item[{\em e.g.:}]}
+\newcommand{\example}{%
+\addtocounter{examplenumber}{1}%
+\item[{\em Example \theexamplenumber}]%
+}
 \newcommand{\powerset}{\mathscr{P}}
 
 % https://tex.stackexchange.com/questions/88281/how-to-change-font-for-the-integral-symbol
