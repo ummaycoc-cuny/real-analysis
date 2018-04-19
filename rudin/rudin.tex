@@ -34,9 +34,10 @@
 \newcommand{\setup}{\item[\null]}
 \newcommand{\remark}{\item}
 \newcommand{\note}{\item[{\em Note:}]}
+\newcommand{\recall}{\item[{\em Recall:}]}
 \newcommand{\example}{%
 \addtocounter{examplenumber}{1}%
-\item[{\em Example \theexamplenumber}]%
+\item[{\em Example \theexamplenumber.}]%
 }
 \newcommand{\powerset}{\mathscr{P}}
 
@@ -353,8 +354,8 @@
 \remark A \term{neighborhood} of $p \in X$ is any open set containing $p$.
 \remark $X$ is \term{Hausdorff} if any two $p \neq q$ can be separated by open sets.
 \remark $X$ is \term{locally compact} if every points has a neighborhood with compact closure.
-\remark Recall Heine-Borel: Subsets of Euclidean space are compact exactly when they are closed and bounded. Thus $\mathbb{R}^n$ is locally compact.
-\remark Recall: Every metric space is Hausdorff.
+\recall Heine-Borel: Subsets of Euclidean space are compact exactly when they are closed and bounded. Thus $\mathbb{R}^n$ is locally compact.
+\recall Every metric space is Hausdorff.
 \end{topic}
 
 % 2.4
@@ -653,7 +654,7 @@ For this section $X$ is locally compact and Hausdorff, $\mu$ a measure on $\sigm
 \begin{topic}{Remarks}
 \remark $C_c(\mathbb{R}^k)$ has a metric that does not need to pass to equivalence classes.
 \remark Likewise, the essential supremum there is the same as the supremum: $\|f\|_\infty = \sup_{x \in \mathbb{R}^k} |f(x)|$.
-\remark If $1 \leq p < \infty$ then 3.14 gives $C_c(\mathbb{R}^k)$ is dense in $L^p(\mathbb{R}^k)$, which is complete by 3.11. $L_p(\mathbb{R}^k)$ is the completion of $C_c(\mathbb{R}^k)$ with respect to the $L^p(\mathbb{R}^k)$ metric.
+\remark If $1 \leq p < \infty$ then 3.14 gives $C_c(\mathbb{R}^k)$ is dense in $L^p(\mathbb{R}^k)$, which is complete by 3.11. $L^p(\mathbb{R}^k)$ is the completion of $C_c(\mathbb{R}^k)$ with respect to the $L^p(\mathbb{R}^k)$ metric.
 \note Keep in mind that we are having {\em different} completions of the same set under different metrics.
 \remark If the distance between $f, g \in C_c(\mathbb{R}^1)$ is given by $\int_{-\infty}^\infty |f(t) - g(t)|\,dt$ then the completion of the resulting metric space is the space of equivalence classes (under $\sim$) of Lebesgue integrable functions.
 \note Important that the completion of functions on $\mathbb{R}^k$ are again functions on $\mathbb{R}^k$.
@@ -672,6 +673,230 @@ For this section $X$ is locally compact and Hausdorff, $\mu$ a measure on $\sigm
 % 3.17
 \begin{topic}{Completion of $C_c(X)$}
 \remark $C_0(X)$ is the completion of $C_c(X)$ relative to the supremum norm metric: $\|f\| = \sup_{x \in X} |f(x)|$.
+\end{topic}
+
+
+\newpage
+\section{Elementary Hilber Space Theory}
+
+\material{Inner Products and Linear Functionals}
+
+% 4.1
+\begin{topic}{Definition}
+\remark An \term{inner product} on a complex vector space $H$ is a function $(\cdot, \cdot) : H \times H \to \mathbb{C}$:
+\begin{enumerate}
+\item $(y, x) = \overline{(x, y)}$
+\item $(x + y, z) = (x, z) + (y, z)$
+\item $(\alpha x, y) = \alpha(x, y)$
+\item $(x, x) \geq 0$
+\item $(x, x) = 0$ only when $x = 0$
+\end{enumerate}
+\remark Implications:
+\begin{itemize}
+\item $(0, y) = 0$ for all $y \in H$.
+\item $x \mapsto (x, y)$ is a linear functional for all $y \in H$.
+\item $(x, \alpha y) = \overline{\alpha}(x, y)$
+\item $(z, x + y) = (z, x) + (z, y)$
+\end{itemize}
+\remark $\|x\|^2 = (x, x)$ is the \term{norm} of $x$.
+\remark An \term{inner product space} (aka \term{unitary space}) is a vector space with an inner product.
+\end{topic}
+
+% 4.2
+\begin{topic}{Schwarz Inequality}
+\remark $|(x, y)| \leq \|x\| \|y\|$.
+\end{topic}
+
+% 4.3
+\begin{topic}{Triangle Inequality}
+\remark $\|x + y\| \leq \|x\| + \|y\|$.
+\end{topic}
+
+% 4.4
+\begin{topic}{Definition}
+\remark Define the distance between $x$ and $y$ to be $\|x - y\|$.
+\remark Since  $\|x - z\| \leq \|x - y\| + \|y - z\|$, $H$ is a metric space.
+\remark If $H$ is a complete metric space, then $H$ is a \term{Hilbert space}.
+\note Throughout the rest of the chapter, $H$ denotes a Hilbert space.
+\end{topic}
+
+% 4.5
+\begin{topic}{Examples}
+\example $\mathbb{C}^n$ is a Hilbert space (scalar multiplication and vector addition defined component wise). Then $$(x, y) = \sum_{j=1}^n \xi_j \overline{\eta}_j$$ where $\xi_j$ and $\eta_j$ are the components of $x$ and $y$.
+\example $L^2(\mu)$ is a Hilbert space for a positive measure $\mu$, with $$(f, g) = \int_X f\overline{g}\,d\mu.$$ Note that $$\|f\| = (f, f)^{\frac{1}{2}} = \left\{ \int_X |f|^2\,d\mu\right\}^{\frac{1}{2}} = \|f\|_2.$$
+\example The continuous complex functions on $[0, 1]$ with $$(f, g) = \int_0^1 f(t)\overline{g(t)}\,dt$$ is an inner product space but {\em not} a Hilbert space.
+\end{topic}
+
+% 4.6
+\begin{topic}{Continuity of the Inner Product}
+\remark For $y \in H$ the following are continuous functions on $H$: $$x \mapsto (x, y);~~x \mapsto (y, x);~~~x \mapsto \|x\|.$$
+\end{topic}
+
+% 4.7
+\begin{topic}{Subspaces}
+\remark $M \subseteq V$, $V$ a vector space, is a \term{subspace} if $M$ is also a vector space.
+\remark A \term{closed subspace} of $H$ is a subspace that is a closed set in the metric topology of $H$.
+\remark If $M$ is a subspace of $H$ then so is it's closure $\overline{M}$.
+\end{topic}
+
+% 4.8
+\begin{topic}{Convex Sets}
+\remark $E \subseteq V$ is \term{convex} if $(1 - t)x + ty \in E$ for all $x, y \in E$, and $0 < t < 1$.
+\remark $E$ is convex if it contains every segment between any two of its points.
+\remark Every subspace of a vector space is complex, and every translate of a convex set is convex.
+\end{topic}
+
+% 4.9
+\begin{topic}{Orthogonality}
+\remark $x$ is \term{orthogonal} to $y$ if $(x, y) = 0 = (y, x)$, written $x \perp y$.
+\remark $x^\perp = \{ y \in H : x \perp y \}$ is the closed subspace of $H$ here $y \mapsto (x, y)$ is identically zero.
+\remark If $M$ is a subspace of $H$ then $$M^\perp = \bigcap_{x \in M} x^\perp$$ is the closed subspace of $H$ of vectors orthogonal to {\em every} vector in $M$.
+\end{topic}
+
+% 4.10
+\begin{topic}{Unique Element of Minimal Norm}
+\remark If $E \subseteq H$ is nonempty, closed, and convex then there is a unique element of minimal norm.
+\end{topic}
+
+% 4.11
+\begin{topic}{Orthogonal Decompositions}
+\setup $M$ is a closed subspace of $H$:
+\remark Every $x \in H$ decomposes uniquely into a sum $Px + Qx$, $Px \in M$, $Qx \in M^\perp$.
+\remark $Px$ and $Qx$ are the points in $M$ and$M^\perp$ nearest to $x$.
+\remark $P : H \to M$ and $Q : H \to M^\perp$ are linear.
+\remark $\|x\|^2 = \|Px\|^2 + \|Qx\|^2$.
+\remark If $M \neq H$ then there exists $y \in H, y \neq 0$ with $y \perp M$.
+\end{topic}
+
+% 4.12
+\begin{topic}{Unique Representation of Continuous Linear Functionals}
+\remark If $L$ is a continuous linear functional on $H$ then there is a unique $y \in H$ with $Lx = (x, y)$.
+\end{topic}
+
+
+\material{Orthonormal Sets}
+
+% 4.13
+\begin{topic}{Definitions}
+\remark If $x_1, \ldots, x_k \in V$ and $c_1, \ldots, c_k$ are scalars then $c_1 v_1 + \cdots + c_k v_k$ is a \term{linear combination} of $x_1, \ldots, x_k$.
+\remark $\{x_1, \ldots, x_k\}$ is \term{independent} if $c_1 x_1 + \cdots + c_k x_k = 0$ implies $c_1 = \cdots = c_k = 0$.
+\remark $S \subseteq V$ is \term{independent} if every finite subset of $S$ is independent.
+\remark $[S]$, the set of all finite linear combinations of $S$, is the smallest subspace of $V$ containing $S$.
+\remark $[S]$ is called the \term{span} of $S$.
+\remark $\{u_\alpha\}_{\alpha \in A}$ is \term{orthonormal} if $\|u_\alpha\| = 1$ for all $\alpha \in A$ and $u_\alpha \perp u_\beta$ for $\alpha \neq \beta$.
+\remark If $\{u_\alpha\}_{\alpha \in A}$ is orthonormal then the \term{Fourier coefficients} of $x$ (relative to $\{u_\alpha\}_{\alpha \in A}$) are the values of $$\hat{x} : A \to \mathbb{C},~~\hat{x}(\alpha) = (x, u_\alpha).$$
+\end{topic}
+
+% 4.14
+\begin{topic}{Fourier Coefficients and Approximations in Finite Subspaces}
+\setup $\{u_\alpha\}_{\alpha \in A}$ are orthonormal in $H$, $F \subseteq A$ is finite, and $M_F$ is the span of $\{u_\alpha\}_{\alpha \in F}$.
+\remark If $\varphi : A \to \mathbb{C}$ is $0$ outside $F$ then $$y = \sum_{\alpha \in F} \varphi(\alpha) u_\alpha \in M_F$$ has the properties $\hat{y}(\alpha) = \varphi(\alpha)$ and $\|y\|^2 = \sum_{\alpha \in F} |\varphi(\alpha)|^2.$
+\remark $\|x - s_F(x)\| < \|x - s\|$ for every $s \in M_F \setminus \{ s_F(x) \}$, where $$s_F(x) = \sum_{\alpha \in F} \hat{x}(\alpha) u_\alpha.$$ i.e.\ $s_F(x)$ is the unique best approximation of $x$ in $M_F$ relative to the norm induced metric.
+\remark For $x \in H$, $$\sum_{\alpha \in F} |\hat{x}(\alpha)|^2 \leq \|x\|^2.$$
+\end{topic}
+
+% 4.15
+\begin{topic}{Infinite Sums}
+\remark Assume $0 \leq \varphi(\alpha) \leq \infty$ for $\alpha \in A$. Then $$\sum_{\alpha \in A} \varphi(\alpha)$$ is the supremum of all finite sums $\varphi(\alpha_1) + \cdots + \varphi(\alpha_n)$ ($\alpha_k$'s distinct).
+\remark This is just the Lebesgue integral of $\varphi$ with respect to the counting measure on $A$.
+\remark In this context we write $\ell^p(A)$ instead of $L^p(\mu)$. $\varphi : A \to \mathbb{C} \in \ell^p(A)$ if and only if $\sum_{\alpha \in A} |\varphi(\alpha)|^p < \infty.$
+\remark Example 2 of 4.5 shows that $\ell^2(A)$ is a Hilbert space with inner product: $$(\varphi, \psi) = \sum_{\alpha \in A} \varphi(\alpha)\overline{\psi(\alpha)}$$ where again the sum is the integral of $\varphi\overline{\psi}$ with respect to the counting measure. Note $\varphi\overline{\psi} \in \ell^1(A)$.
+\remark 3.13 shows that functions identically zero outside some finite subset of $A$ are dense in $\ell^p(A)$.
+\remark If $\varphi \in \ell^2(A)$ then $\{\alpha \in A : \varphi(\alpha) \neq 0 \}$ is at most countable.
+\note The above uses $\ell^p$ in some places above where the text uses $\ell^2$.
+\end{topic}
+
+% 4.16
+\begin{topic}{Isometry Extension}
+\remark Suppose that \begin{enumerate}
+\item $X$ and $Y$ re metric spaces with $X$ complete;
+\item $f : X \to Y$ is continuous;
+\item $X_0$ is dense in $X$ and $f$ is an isometry on $X_0$; and
+\item $f(X_0)$ is dense in $Y$.
+\end{enumerate}
+Then $f$ is an isometry of $X$ {\bf\em\underline{onto}} $Y$.
+\recall An isometry preserves distances.
+\end{topic}
+
+% 4.17
+\begin{topic}{The Bessel Inequality \& The Riesz-Fischer Theorem}
+\remark Let $\{u_\alpha\}_{\alpha \in A}$ be orthonormal in $H$ and $P$ the span of $\{u_\alpha\}_{\alpha \in A}$. Then $$\sum_{\alpha \in A} |\hat{x}(\alpha)|^2 \leq \|x\|^2$$ holds for all $x \in H$. Moreover, $x \mapsto \hat{x}$ is a continuous linear mapping of $H$ onto $\ell^2(A)$ whose restriction to $\overline{P}$ is an isometry onto $\ell^2(A)$.
+\remark The fact that $x \mapsto \hat{x}$ carries $H$ onto $\ell^2(A)$ is the Riesz-Fischer theorem.
+\end{topic}
+
+% 4.18
+\begin{topic}{Maximal Orthonormal Set Conditions}
+\remark If $\{u_\alpha\}_{\alpha \in A}$ are orthonormal, then the following are equivalent:
+\begin{enumerate}
+\item $\{u_\alpha\}_{\alpha \in A}$ is a maximal orthonormal set in $H$.
+\item The span of $\{u_\alpha\}_{\alpha \in A}$ is dense in $H$.
+\item $\sum_{\alpha \in A} |\hat{x}(\alpha)|^2 = \|x\|^2$ holds for all $x \in H$.
+\item $\sum_{\alpha \in A} \hat{x}(\alpha) \overline{\hat{y}(\alpha)} = (x, y)$ holds for all $x, y \in H$.
+\end{enumerate}
+\remark The last formula is Parseval's identity. Note $\hat{x}\hat{y} \in \ell^1(A)$ since $\hat{x}, \hat{y} \in \ell^2(A)$.
+\remark A maximal orthonormal set is usually called a \term{complete orthonormal set} or an \term{orthonormal basis}.
+\end{topic}
+
+% 4.19
+\begin{topic}{Isomorphisms}
+\remark Two vector spaces are \term{isomorphic} if there is a linear bijection between them.
+\remark Two Hilbert spaces are \term{isomorphic} if there is a linear bijection between them which preserves inner products: $(x, y) = (\Lambda x, \Lambda y)$ for all $x, y$.
+\remark With the above, we have the following from 4.17 and 4.18:
+
+If $\{u_\alpha\}_{\alpha \in A}$ is a maximal orthonormal set in $H$ then $x \mapsto \hat{x}$ is an isomorphism between $H$ and $\ell^2(A)$.
+\remark With 4.22 we show that every nontrivial Hilbert space has a maximal orthonormal set and so is isomorphic to some $\ell^2(B)$.
+\end{topic}
+
+% 4.20
+\begin{topic}{Partially Ordered Sets}
+\remark $\mathcal{P}$ is \term{partially ordered} by $\leq$ if $\leq$ is reflexive, anti-symmetric, and transitive.
+\remark $\mathcal{L} \subseteq \mathcal{P}$ is \term{totally ordered} (or \term{linearly ordered}) if either $a \leq b$ or $b \leq a$ for every $a, b \in \mathcal{L}$.
+\end{topic}
+
+% 4.21
+\begin{topic}{Hausdorff Maximality Theorem}
+\remark Every non-empty partially ordered set contains a maximal totally ordered subset.
+\end{topic}
+
+% 4.22
+\begin{topic}{Existence of Maximal Orthonormal Sets}
+\remark Every orthonormal set in a Hilbert space is contained in a maximal orthonormal set.
+\end{topic}
+
+
+\material{Trigonometric Series}
+
+% 4.23
+\begin{topic}{Definitions}
+\remark The $2\pi$-periodic functions on $\mathbb{R}^1$ can be identified with the functions on the unit circle $T \subseteq \mathbb{C}$.
+\note We can thus switch between writing $f(t)$ and $f(e^{it})$ where $t \in [0, 2\pi]$.
+\remark $L^p(T)$, $1 \leq p < \infty$, consists of all complex, Lebesgue measurable, $2\pi$-periodic functions on $\mathbb{R}^1$ for which $$\|f\|_p = \left\{ \dfrac{1}{2\pi} \int_{-\pi}^\pi |f(t)|^p\,dt\right\}^{\frac{1}{p}} < \infty.$$
+\remark $L^\infty(T)$ consists of all $2\pi$-periodic members of $L^\infty(\mathbb{R}^1)$ with the essential supremum norm.
+\remark $C(T)$ consists of all continuous complex functions on $T$ with norm $\|f\|_\infty = \sup_{t \in [0, 2\pi]} |f(t)|$.
+\remark A \term{trigonometric polynomial} is a sum of the form $f(t) = \sum_{n=-N}^N c_n e^{int}$.
+\remark Define the inner product in $L^2(T)$ by $$(f, g) = \dfrac{1}{2\pi}\int_{-\pi}^\pi f(t)\overline{g(t)}\,dt.$$
+\remark $\{ u_n \}_{n \in \mathbb{Z}}$, where $u_n(t) = e^{int}$, is an orthonormal set in $L^2(T)$ called the \term{trigonometric system}.
+\end{topic}
+
+% 4.24
+\begin{topic}{Completeness of the Trigonometric System}
+\remark If we can prove that $f \in C(T)$ can be approximated by trigonometric polynomials then since $C(T)$ is dense in $L^2(T)$ (see 3.14) the trigonometric system is complete will be complete by 4.18.
+\end{topic}
+
+% 4.25
+\begin{topic}{Approximations in $C(T)$ by Trigonometric Polynomials}
+\remark If $f \in C(T)$, $\epsilon > 0$, then there exists a trigonometric polynomial $P$ with $|f - P| < \epsilon$.
+\remark By 4.24, the trigonometric system is complete.
+\end{topic}
+
+% 4.26
+\begin{topic}{Fourier Series}
+\remark For $f \in L^1(T)$ the \term{Fourier coefficients} of $f$ are defined, for $n \in \mathbb{Z}$, by $$\hat{f}(n) = \dfrac{1}{2\pi} \int_{-\pi}^\pi f(t) e^{int}\,dt.$$
+\remark The \term{Fourier series} of $f$ is $$\sum_{n = -\infty}^\infty \hat{f}(n) e^{int}$$ with partial sums $$s_N(t) = \sum_{-N}^N \hat{f}(n) e^{int}.$$
+\remark {\em Riesz-Fischer Theorem} now states if $\{c_n\}$ are complex numbers with $\sum_{n=-\infty}^\infty |c_n|^2 < \infty$ then there exists $f \in L^2(T)$ such that, for $n \in \mathbb{Z}$, $$c_n = \dfrac{1}{2\pi} \int_{-\pi}^\pi f(t) e^{-int}.$$
+\remark {\em Parseval's theorem} asserts that, for $f, g \in L^2(T)$, $$\sum_{n = -\infty}^\infty \hat{f}(n) \overline{\hat{g}(n)} = \dfrac{1}{2\pi} \int_{-\pi}^\pi f(t)\overline{g(t)}\,dt.$$
+\remark The $L^2(T)$ limit of partial sums $s_N$ of $f$ converges in the $L^2(T)$ norm to $f$.
+\remark Associating $f$ with $\hat{f}$ is a Hilbert space isomorphism between $L^2(T)$ and $\ell^2(\mathbb{Z})$.
 \end{topic}
 
 \end{document}
