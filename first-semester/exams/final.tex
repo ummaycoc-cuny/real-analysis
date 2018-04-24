@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{fancyheadings}
+
+\newcommand{\weakly}{\rightharpoonup}
+
+\newcommand{\ip}[2]{\langle #1, #2 \rangle}
+
+\DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\Span}{span}
+
+\setlength\textheight{8in} \setlength\textwidth{6.2in}
+\setlength\oddsidemargin{0.1in} \setlength\evensidemargin{0.1in}
+\setlength\topmargin{-0.0in}
+
+\lhead{Matthew Maycock}
+\rhead{Real Analysis Exam}
+
+\begin{document}
+
+\begin{enumerate}
+\item Let $X$ be a linear space with a countably infinite dimension. Then there is no norm on $X$ with respect to which $X$ is complete.
+
+{\bf Claim}: If $S \subsetneq X$ is a subspace then $\Int S = \emptyset$.
+
+{\bf Proof of Claim}: Let $S$ be a subspace of $X$ such that $\Int S \neq \emptyset$. Then for some $r > 0$, and $x \in X$ there is a ball $B_r(x) \subseteq S$. For $z \in X$ define $y = x + \frac{r}{2\|z\|}z$ -- note that $y \in B_r(x)$. Since $y, x \in B_r(x) \subseteq S$ we have $y - x = \frac{r}{2\|z\|}z \in S$, but then scaling by $\frac{2\|z\|}{r}$ we get $z \in S \Rightarrow S = X$.
+
+{\bf Proof of Statement}: If $X$ has a countable basis $\{x_n\}_{n=1}^\infty$ then let $X_n = \Span \{x_1, \ldots, x_n\}$. The $X_n$ is closed since it is finite dimensional, but $X = \cup_{n=1}^n X_n$ and each $X_n$ is a proper subspace and hence has empty interior. But then $X$ has empty interior by the Baire category theorem, but $\Int X = X$, contradiction.
+
+
+\item A linear subspace of a normed linear space $X$ is strongly closed iff it is weakly closed.
+
+Every weakly-open set is open in the strong topology we have, by taking complements, that every weakly-closed set is strongly-closed. If $S$ is a strongly closed subspace then $S$ being closed and convex is it is the intersection of all closed half-spaces containing it, but half-spaces are defined by inequalities from normals projecting out of a hyperplane found via functionals and so half-spaces are weakly closed and thus $S$ is the intersection of weakly closed sets and is thus weakly closed.
+
+
+\item Let $H$ be a Hilbert space. Show that $T \in \mathcal{L}(H)$ is compact iff whenever $u_n \weakly u$ and $v_n \weakly v$, then $\langle T u_n, v_n \rangle \to \langle T u, v \rangle$.
+
+Assume $T$ is compact and that $u_n \weakly u$ and $v_n \weakly v$. By compactness we have that $T u_n \to u$ and so by continuity we get that $\langle T u_n, v_n \rangle \to \langle T u, v_n \rangle$ and by weak convergence we get $\langle T u, v_n \rangle \to \langle T u, v \rangle$, and so by continuity in both inputs the result follows.
+
+Now assume that whenever $u_n \weakly u$ and $v_n \weakly v$ we have that $\langle T u_n, v_n \rangle \to \langle T u, v \rangle$. Then we want to show that the closed unit ball has a precompact image. Since Hilbert spaces are reflexive we know that the closed unit ball is sequentially compact. Since Hilbert spaces are Banach spaces are metric spaces, if we can show that $T(B)$ is sequentially compact we will be done.
+
+
+\item Let $(X, \rho)$ be a compact metric space and $V$ a closed subspace of $(C(X), \rho_\infty)$. Suppose that each $f \in V$ is H\"olderian. Then $V$ is finite dimensional.
+
+Fix $x$, $y$ in $X$ and $m \in \mathbb{N}$ and define $$F_{m,x,y} = \{ f \in V \mid |f(x) - f(y)| \leq m d(x, y)^{1/m} \}.$$ If $h_k \in F_{m, x, y}$ converges uniformly to $f$ then $|h_k(x) - h_k(y)| \leq m d(x, y)^{1/m}$ and so $$\lim_{k \to \infty} |h_k(x) - h_k(y)| = |f(x) - f(y)| \leq m d(x, y)^{1/m}$$ and $f \in F_{m, x, y}$, and so $F_{m, x, y}$ is closed. Now define $$F_n = \bigcap_{x, y \in X} F_{n, x, y}.$$ Then $F_n$ is the intersection of closed sets and hence is closed. Let $f \in V$ and find $C_f, \alpha_f$. Then there is an $n \geq C$ with $1/n < \alpha$ and so $f \in F_n$. Thus $V = \cup F_n$ and, by Baire's category theorem, applied to the relative topology on $V$, some $F_{n_0}$ must have a non-empty interior. Thus there is $$B_r(f_0) \subset F_{n_0}.$$ For $f \in V$ set $$\beta_f = \dfrac{r}{2(1 + \|f\|_\infty)}.$$ Then $f_1 = f_0 + \beta_f f \in F_{n_0}$ which means that $f = \beta_f^{-1} (f_0 - f_1)$ and so $$|f(x) - f(y)| = \beta_f^{-1}|f_0(x) - f_0(y) + f_1(x) - f_1(y)| \leq \dfrac{2 n_0 d(x, y)^{1/n_0}}{\beta_f}.$$ For the unit ball in $V$ we have $\|f\|_\infty < 1$. But this means Arzela-Ascoli's hypotheses are satisfied on the unit ball and so we get sequential compactness and thus compactness in the closure of the unit ball since $\|\cdot\|_\infty$ induces a metric. By Riesz's Theorem we get that $V$ is finite dimensional.
+
+
+\item Let $X$ be a Banach space and $T \in \mathcal{L}(X)$ such that $\|T\| < 1$. Show that $I - T$ is an isomorphism. Show that $\sum_{n=0}^\infty T^n$ converges in $\mathcal{L}(X)$ and $(I - T)^{-1} = \sum_{n=0}^\infty T^n$.
+
+Since $$(I - T) \sum_{n=0}^\infty T^n = \sum_{n=0}^\infty T^n - \sum_{n=1}^\infty T^n = \left(\sum_{n=0}^\infty T^n\right)(I - T)$$ and the middle expression is clearly $I$ we have that $(I - T)$ is a bijection. $I-T$ is bounded since $I$ and $T$ are, thus $(I - T)^{-1} = \sum_{n=0}^\infty T^n$. If $(I - T)^{-1} y = x$ then $y = (I - T)x$ and hence $y = x - Tx$, or $x = y + Tx$. And so $\|x\| \leq \|y\| + \|T\| \cdot \|x\| \Rightarrow \|x\| - \|T\| \|x\| \leq \|y\|$ and $\|x\| \leq \|y\|/(1 - \|T\|)$. Hence $(I - T)^{-1}$ is bounded. Converge: consider partial sum.
+
+
+\item Let $X = l^\infty$. Show that the closed unit ball $B^\ast$ of the dual $X^\ast$ is not weak-* sequentially compact. How do you reconcile this fact with the Alaoglu and Helly's Theorems?
+
+
+\item Let $(X, \tau)$ be a compact Hausd\"orff topological space. Show that any strictly weaker topology on $X$ is compact but not Hausd\"orff, and any strictly stronger topology is Hausd\"orff but not compact.
+
+In general a weaker topology of a compact topology also gives compactness: take open cover in the weaker topology, find finite subcover in the stronger one, and pull back to the weaker. Likewise if a space is Hausd\"orff, it stays so when one adds open sets and so a stronger topology is Hausd\"orff if a weaker one is.
+
+Now let $(X, \tau)$ be compact-Hausd\"orff and let $\sigma \subseteq \tau$ be a weaker topology on $X$. Then $(X, \sigma)$ is compact. If it is Hausd\"orff too, then let $id : (X, \tau) \to (X, \sigma)$, continuous since $\sigma$ is weaker than $\tau$, goes from a compact space to a Hausd\"orff space, and so is a homeomorphism and so $\sigma = \tau$. Likewise if $\tau \subseteq \psi$, $\psi$ stronger than $\tau$, then the space $(X, \psi)$ is Hausdorff. If $(X, \psi)$ is compact then $id : (X, \psi) \to (X, \tau)$ again gives a homeomorphism.
+
+
+\item Let $H$ be a Hilbert space. An invertible operator $T \in \mathcal{L}(X)$ is said to be orthogonal provided provided that $T^{-1} = T^\ast$.Show that an invertible operator is orthogonal iff it is an isometry.
+
+If $T$ is an isometry then $\|T x\| = \|x\|$ and so $\langle T x, T x \rangle = \langle x, x \rangle$ and hence $\langle T^\ast T x, x \rangle = \langle x, x \rangle$. Replacing $x$ with $x + y$ we get $$\langle T^\ast T (x + y), x + y) \rangle = \langle x + y, x + y \rangle$$ and expanding we get that $\langle T^\ast T x, y \rangle = \langle x, y \rangle$ since $T^\ast T$ is symmetric.
+
+Now let $T^\ast T = I$, and we must show that $T$ is an isometry. Just expand the norm.
+
+
+\end{enumerate}
+
+\end{document}
