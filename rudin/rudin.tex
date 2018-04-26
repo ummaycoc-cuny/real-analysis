@@ -6,6 +6,7 @@
 \usepackage{fancyheadings}
 \usepackage[top=1.25in, bottom=1.25in, left=1.0in, right=1.0in]{geometry}
 \usepackage{hyperref}
+\usepackage{makeidx}
 
 \pagestyle{fancy}
 \lhead{Papa Rudin Notes}
@@ -30,7 +31,7 @@
 \end{itemize}%
 }
 
-\newcommand{\term}[1]{{\bf #1}}
+\newcommand{\term}[1]{\index{#1}{\bf #1}}
 \newcommand{\setup}{\item[\null]}
 \newcommand{\remark}{\item}
 \newcommand{\note}{\item[{\em Note:}]}
@@ -45,6 +46,8 @@
 \DeclareSymbolFont{rudin-largesymbols}{OMX}{mdbch}{m}{n}
 \DeclareMathSymbol{\intop}{\mathop}{rudin-largesymbols}{82}
 \DeclareMathOperator{\vol}{vol\,}
+
+\makeindex
 
 \begin{document}
 \pagenumbering{roman}
@@ -898,5 +901,8 @@ If $\{u_\alpha\}_{\alpha \in A}$ is a maximal orthonormal set in $H$ then $x \ma
 \remark The $L^2(T)$ limit of partial sums $s_N$ of $f$ converges in the $L^2(T)$ norm to $f$.
 \remark Associating $f$ with $\hat{f}$ is a Hilbert space isomorphism between $L^2(T)$ and $\ell^2(\mathbb{Z})$.
 \end{topic}
+
+\newpage
+\printindex
 
 \end{document}
