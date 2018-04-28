@@ -33,6 +33,8 @@
 
 \newcommand{\term}[1]{\index{#1}{\bf #1}}
 \newcommand{\setup}{\item[\null]}
+\newcommand{\question}{\item[{\em Question:}]}
+\newcommand{\notation}{\item[{\em Notation:}]}
 \newcommand{\remark}{\item}
 \newcommand{\note}{\item[{\em Note:}]}
 \newcommand{\recall}{\item[{\em Recall:}]}
@@ -222,7 +224,7 @@
 \remark If $f \geq 0$ and $c \in [0, \infty)$ then $\int_E cf\,d\mu = c \int_E f\,d\mu$.
 \remark If $f \equiv 0$ on $E$ then $\int_E f\,d\mu = 0$ even if $\mu(E) = \infty$.
 \remark If $\mu(E) = 0$ then $\int_E f\,d\mu = 0$ if if $f \equiv \infty$ on $E$.
-\remark If $f \geq 0$ then $\int_E f\,d\mu = \int_X \chi_E f d\mu$.
+\remark If $f \geq 0$ then $\int_E f\,d\mu = \int_X \chi_E f\,d\mu$.
 \end{topic}
 
 % 1.25
@@ -900,6 +902,210 @@ If $\{u_\alpha\}_{\alpha \in A}$ is a maximal orthonormal set in $H$ then $x \ma
 \remark {\em Parseval's theorem} asserts that, for $f, g \in L^2(T)$, $$\sum_{n = -\infty}^\infty \hat{f}(n) \overline{\hat{g}(n)} = \dfrac{1}{2\pi} \int_{-\pi}^\pi f(t)\overline{g(t)}\,dt.$$
 \remark The $L^2(T)$ limit of partial sums $s_N$ of $f$ converges in the $L^2(T)$ norm to $f$.
 \remark Associating $f$ with $\hat{f}$ is a Hilbert space isomorphism between $L^2(T)$ and $\ell^2(\mathbb{Z})$.
+\end{topic}
+
+
+\newpage
+\section{Examples of Banach Space Techniques}
+
+\material{Banach Spaces}
+
+% 5.1
+\steptopic
+
+% 5.2
+\begin{topic}{Definition}
+\remark $X$ is a \term{normed linear space} if for $x \in X$ there is a nonnegative real $\|x\|$ called the \term{norm} of $x$ such that \begin{enumerate}
+\item $\|x + y\| \leq \|x\| + \|y\|$ for all $x, y \in X$;
+\item $\|\alpha x\| = |\alpha| \|x\|$ for $x \in X$, $\alpha$ scalar;
+\item $\|x\| = 0$ only if $x = 0$.
+\end{enumerate}
+\remark By the first property, the \term{triangle inequality} holds: $\|x - y\| \leq \|x - z\| + \|z - y\|$.
+\remark Every normed linear space is a metric space with distance $d(x, y) = \|x - y\|$.
+\remark A \term{Banach space} is a complete normed linear space.
+\remark Definition same for {\em real} Banach spaces (real scalars instead).
+\example Every Hilbert space is a Banach space.
+\example Every $L^p(\mu)$ space normed by $\|\cdot\|_p$.
+\example $C_0(X)$ under the supremum norm.
+\example The complex numbers $\mathbb{C}$.
+\end{topic}
+
+% 5.3
+\begin{topic}{Definition}
+\remark The \term{operator norm} of a linear transformation $\Lambda : X \to Y$ with $X, Y$ normed linear spaces, is $$\|\Lambda\| = \sup \{ \|\Lambda x\| : x \in X, \|x\| \leq 1 \}.$$
+\remark If $\|\Lambda\| < \infty$ then $\Lambda$ is a \term{bounded linear transformation}.
+\remark A \term{unit vector} is a vector $x$ such that $\|x\| = 1$.
+\remark In the definition of $\|\Lambda\|$ we could have considered only unit vectors in $X$.
+\remark $\|\Lambda\|$ is the smallest number such that $\|\Lambda x\| \leq \|\Lambda\| \|x\|$ holds for all $x \in X$.
+\remark $\Lambda$ maps the \term{closed unit ball} $\{x \in X : \|x\| \leq 1\}$ to the closed ball of radius $\|\Lambda\|$ centered at $0 \in Y$.
+\remark If $Y = \mathbb{C}$ and $\|\Lambda\| < \infty$ then $\Lambda$ is a \term{bounded linear functional}.
+\end{topic}
+
+% 5.4
+\begin{topic}{Relation Between Boundedness and Continuity}
+\remark If $\Lambda : X \to Y$ is a linear transformation between normed linear spaces, then the following are equivalent: \begin{enumerate}
+\item $\Lambda$ is bounded.
+\item $\Lambda$ is continuous.
+\item $\Lambda$ is continuous at a point of $X$.
+\end{enumerate}
+\end{topic}
+
+
+\material{Consequences of Baire's Theorem}
+
+% 5.5
+\steptopic
+
+% 5.6
+\begin{topic}{Baire's Theorem}
+\remark In a complete metric space, the countable intersection of open dense sets is dense.
+\remark In a complete metric space, the countable intersection of dense $G_\delta$'s is a dense $G_\delta$.
+\end{topic}
+
+% 5.7
+\begin{topic}{Cateogry}
+\remark Baire's theorem is sometimes called Baire's category theorem.
+\remark $E \subseteq X$ is \term{nowhere dense} if $E$'s closure has empty interior.
+\remark The countable union of nowhere dense sets is a set of the \term{first category}.
+\remark Any set {\em not} of the first category is of the \term{second category}.
+\remark Baire's theorem says no complete metric space is of the first category.
+\end{topic}
+
+% 5.8
+\begin{topic}{Banach-Steinhaus Theorem}
+\remark Suppose $X$ is Banach, $Y$ is a normed linear space, and $\{\Lambda_\alpha\}_{\alpha \in A}$ are bounded linear transformations from $X$ into $Y$. Then either the $\{\Lambda_\alpha\}_{\alpha \in A}$ have a common bound or $\sup_{\alpha \in A} \|\Lambda_\alpha x\| = \infty$ for all $x$ in some dense $G_\delta$ of $X$.
+\remark Geometrically, either all $\Lambda_\alpha$ map the unit ball in $X$ into some common ball in $Y$ or no ball in $Y$ contains $\Lambda x$ for $x$ in a dense $G_\delta$.
+\remark Sometimes called the \term{uniform boundedness principle}.
+\end{topic}
+
+% 5.9
+\begin{topic}{Open Mapping Theorem}
+\remark Let $U$ and $V$ be the open unit balls of the Banach spaces $X$ and $Y$. For every surjective bounded linear transformation $\Lambda : X \to Y$ there is a $\delta > 0$ such that $\delta V \subseteq \Lambda(U).$
+\remark By linearity, the image of any ball in $X$ centered at $x_0$ contains a ball in $Y$ centered at $\Lambda x_0$, And so every open set has an open image.
+\remark Rewording: If $\|y\| < \delta$ then $y = \Lambda x$ for some $x$ with $\|x\| < 1$.
+\end{topic}
+
+% 5.10
+\begin{topic}{Existence of Inverse Bounded Linear Transformations}
+\remark If $\Lambda$ is a bijective bounded linear transformation between Banach spaces then there is a $\delta$ such that $\|\Lambda x\| \geq \delta \|x\|$ for all $x$ in the domain, and so $\Lambda^{-1}$ is a bijective bounded linear transformation.
+\end{topic}
+
+
+\material{Fourier Series of Continuous Functions}
+
+% 5.11
+\begin{topic}{A Convergence Problem}
+\question Is it true that for every $f \in C(T)$ that the Fourier series of $f$ converges to $f(x)$ at every point $x$?
+\recall The $n$th partial sum of the Fourier series of $f$ at $x$ is given by $$s_n(f; x) = \dfrac{1}{2\pi} \in_{-\pi}^\pi f(t) D_n(x - t)\,dt~~(n = 0, 1, 2, \ldots),$$ where $$D_n(f) = \sum_{k=-n}^n e^{ikt}.$$
+\remark The question is to determine whether $\lim_{n \to \infty} s_n(f; x) = f(x)$ for every $f \in C(T)$ and $x \in \mathbb{R}$.
+\remark Result: No (from Banach-Steinhouse).
+\end{topic}
+
+% 5.12
+\begin{topic}{Dense $G_\delta$'s in $C(T)$ and $\mathbb{R}^1$.}
+\setup Define $\displaystyle s^*(f; x) = \sup_n |s_n(f; x)|.$
+\remark There exists $E \subseteq C(T)$, a dense $G_\delta$, such that for $f \in E$ the set $$Q_f = \{ x : s^*(f; x) = \infty \}$$ is a dense $G_\delta$ in $\mathbb{R}^1$.
+\end{topic}
+
+% 5.13
+\begin{topic}{Countable and Dense $G_\delta$'s}
+\remark In a complete metric space without isolated points, a dense $G_\delta$ must be uncountable.
+\end{topic}
+
+
+\material{Fourier Coefficients of $L^1$-functions}
+
+% 5.14
+\begin{topic}{Riemann-Lebesgue Lemma}
+\remark For $f \in L^1(T)$ we associate $\hat{f} : Z \to \mathbb{C}$ defined by $$\hat{f}(n) = \dfrac{1}{2\pi} \int_{-\pi}^\pi f(t) e^{-int}\,dt.$$
+\remark $\hat{f}(n) \to 0$ as $n \to \infty$.
+\remark Let \term{$c_0$} be the space of all functions $\varphi : \mathbb{Z} \to \mathbb{C}$ with $\varphi(n) \to 0$ as $n \to \pm \infty$ with the norm $$\|\varphi\|_\infty = \sup \{|\varphi(n)| : n \in \mathbb{Z}\}.$$ $c_0$ is a Banach space; $c_0$ is nothing but $C_0(\mathbb{Z})$ when $\mathbb{Z}$ has the discrete topology.
+\end{topic}
+
+% 5.15
+\begin{topic}{Converse to Riemann-Lebesgue Lemma}
+\remark The mapping $f \mapsto \hat{f}$ is a injective bounded linear transformation from $L^1(T)$ into, but not onto, $c_0$.
+\end{topic}
+
+
+\material{The Hahn-Banach Theorem}
+
+% 5.16
+\begin{topic}{Hahn-Banach Theorem}
+\remark If $M$ is a subspace of a normed linear space $X$ with $f$ a bounded linear function on $M$ then $f$ can be extended to a bounded linear functional $F$ on $X$ with $\|F\| = \|f\|$.
+\note $M$ need not be closed.
+\remark The norms are calculated relative to the appropriate domains.
+\end{topic}
+
+% 5.17
+\begin{topic}{Relation Between Complex-Linear and Real-Linear Functionals}
+\remark A \term{complex-linear functional} is a complex valued linear function on a complex vector space.
+\remark A \term{real-linear functional} is a real valued linear function on a complex or real vector space where linearity for scalar multiplication is only required for {\em real} scalars.
+\remark If $f = u + iv$ is a complex-linear functional then $u$ is a real-linear functional.
+\remark For a complex vector space $V$: \begin{enumerate}
+\item If $f = u + iv$ is a complex-linear functional on $V$ then $f(x) = u(x) - iu(ix)$ for all $x \in V$.
+\item If $u$ is a real-linear functional on $V$ then $f(x) = u(x) - iu(ix)$ is a complex-linear functional on $V$.
+\item If $V$ is normed and $f(x) = u(x) - iu(ix)$ then $\|f\| = \|u\|$.
+\end{enumerate}
+\end{topic}
+
+% 5.18
+\steptopic
+
+% 5.19
+\begin{topic}{Characterization of Closures of (Normed) Linear Subspaces}
+\remark If $M$ is a linear subspace of a normed linear space $X$, then $x_0 \in \overline{M}$ if and only if any bounded linear functional vanishing on $M$ vanishes at $x_0$.
+\end{topic}
+
+% 5.20
+\begin{topic}{Unit Linear Functionals}
+\remark If $X$ is a normed linear space and $x_0 \in X \setminus \{0\}$ then there is a bounded linear functional $f$ on $X$ with $\|f\| = 1$ and $f(x_0) = \|x_0\|$.
+\end{topic}
+
+% 5.21
+\begin{topic}{Dual Space}
+\remark If $X$ is a normed linear space then the \term{dual space} $X^*$ is the collection of all bounded linear functionals on $X$. If addition and scalar multiplication are defined in the obvious way, it is a Banach space.
+\remark If $X$ is nontrivial then $X^*$ is nontrivial (5.20).
+\remark $X^*$ separates points: If $x_0 \neq x_1$ then there exists $f \in X^*$ with $f(x_0) \neq f(x_1)$.
+\remark $\|x\| = \sup \{ |f(x)| : f \in X^*, \|f\| = 1 \}$.
+\remark $f \mapsto f(x)$ is a bounded linear functional on $X^*$ with norm $\|x\|$.
+\end{topic}
+
+
+\material{An Abstract Approach to the Poisson Integral}
+
+% 5.22
+\begin{topic}{Remarks, Definitions, and Notations}
+\notation Let $\|f\|_E = \sup \{ |f(x)| : x \in E \}$.
+\remark $H$ is a \term{boundary} of $K$ corresponding to $A$ if: \begin{itemize}
+\item $K$ is a compact Hausdorff space;
+\item $H \subseteq K$ is compact; and
+\item $A$, a subspace of $C(K)$, contains the constant $1$ function and $\|f\|_K = \|f\|_H$ for all $f \in A$.
+\end{itemize}
+\remark If $f \in A, x \in K$ then $|f(x)| \leq \|f\|_H$ and so if $f \equiv 0$ on $H$ then $f \equiv 0$ on $K$.
+\remark If $f_1, f_2 \in A$ agree on $H$ then they agree on $K$.
+\remark Let $M$ be the $H$ restriction of elements of $A$. $M$ is a subspace of $C(H)$ and $M$ and $A$ are in a one-to-one norm-preserving correspondence via restriction (or extension).
+\remark $f \mapsto f(x)$ is a bounded linear functional of norm $1$ on $M$ (for fixed $x$). Since $M$ is a subspace of $C(H)$, Hahn-Banach yields a linear functional $\Lambda$ on $C(H)$ of norm $1$ such that $\Lambda f = f(x)$ for $f \in M$.
+\remark $\Lambda$ is a positive linear functional on $C(H)$. Combined with 2.14 this gives a regular positive Borel measure $\mu_x$ such that for $f \in A$, $$f(x) = \Lambda f = \int_H f\,d\mu_x.$$ Thus, for $x \in K$ there is a positive measure $\mu_x$ on the boundary $H$ which represents $x$ in the sense that the above integral holds for $f \in A$.
+\end{topic}
+
+% 5.23
+\steptopic
+
+% 5.24
+\begin{topic}{The Poisson Kernel}
+\remark Let $A$ be a subspace of $C(\overline{U})$, $U$ the open unit disk, such that $A$ contains all polynomials and $\|f\|_U = \|f\|_T$ for $f \in A$. For $z \in U$ we have a positive Borel measure $\mu_z$ on $T$ such that for every $f \in A$, $$f(z) = \int_T f\,d\mu_z.$$
+\remark Fix $z = r e^{i\theta} \in U$. If $u_n(w) = w^n$ we get $$r^n e^{in\theta} = \int_T u_n\,d\mu_z~~(n = 0, 1, 2, \ldots).$$ Since $u_{-n} = \overline{u}_n$ on $T$, $$r^{|n|} e^{in\theta} = \int_T u_n\,d\mu_z~~(n = 0, \pm 1, \pm 2, \ldots).$$
+\remark The \term{Poisson Kernel} is the real function (where $t \in \mathbb{R}$): $$P_r(\theta - t) = \sum_{n = -\infty}^{\infty} r^{|n|} e^{in(\theta - t)}.$$ Note the series is dominated by the convergent geometric series $\sum r^{|n|}$, and so we have $$\dfrac{1}{2\pi} \int_{-\pi}^\pi P_r(\theta - t) e^{int}\,dt = r^{|n|} e^{in\theta} = \int_T f\,d\mu_z$$ for $f = u_n$ and thus for every trigonometric polynomial, and by 4.25 every $f \in C(T)$.
+\remark The above holds if $f \in A$ and so for such $f$, $$f(z) = \dfrac{1}{2\pi} \int_{-\pi}^\pi f(e^{it}) P_r(\theta - t)\,dt.$$
+\remark We also have $$P_r(\theta - t) = \dfrac{1 - r^2}{1 - 2r \cos (\theta - t) + r^2}.$$
+\note $P_r(\theta - t) \geq 0$ for $0 \leq r < 1$.
+\end{topic}
+
+% 5.25
+\begin{topic}{The Poisson Integral}
+\setup Let $U$ be the open unit disc.
+\remark Suppose $A$ is a subspace of $C(\overline{U})$ containing all polynomials such that for $f \in A$, $$\sup_{z \in U} |f(z)| = \sup_{z \in T} |f(z)|.$$ Then, for $f \in A, re^{i\theta} \in U$, the Poisson integral representation holds: $$f(re^{i\theta}) = \dfrac{1}{2\pi} \int_{-\pi}^\pi \dfrac{1 - r^2}{1 - 2r \cos (\theta - t) + r^2} f(e^{it})\,dt.$$
 \end{topic}
 
 \newpage
