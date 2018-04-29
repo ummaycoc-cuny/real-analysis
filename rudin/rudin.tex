@@ -7,6 +7,8 @@
 \usepackage[top=1.25in, bottom=1.25in, left=1.0in, right=1.0in]{geometry}
 \usepackage{hyperref}
 \usepackage{makeidx}
+\usepackage{ifthen}
+\usepackage{xifthen}
 
 \pagestyle{fancy}
 \lhead{Papa Rudin Notes}
@@ -31,7 +33,12 @@
 \end{itemize}%
 }
 
-\newcommand{\term}[1]{\index{#1}{\bf #1}}
+\newcommand{\term}[2][]{%
+\ifthenelse{\isempty{#1}}%
+{\index{#2}}%
+{\index{#1@#2}}%
+{\bf #2}%
+}
 \newcommand{\setup}{\item[\null]}
 \newcommand{\question}{\item[{\em Question:}]}
 \newcommand{\notation}{\item[{\em Notation:}]}
@@ -74,7 +81,7 @@
 
 % 1.3
 \begin{topic}{Definition}
-\remark $\mathfrak{M} \subseteq \powerset(X)$, containing $X$, is a \term{$\sigma$-algebra} if it is closed under complementation and countable unions.
+\remark $\mathfrak{M} \subseteq \powerset(X)$, containing $X$, is a \term[sigma-algebra]{$\sigma$-algebra} if it is closed under complementation and countable unions.
 \remark $(X, \mathfrak{M})$ is a \term{measurable space}; elements of $\mathfrak{M}$ are \term{measurable sets}.
 \remark $f : (X, \mathfrak{M}) \to (Y, \tau)$ is \term{measurable} if open sets have measurable preimages ($\tau$ a topology).
 \note Instead of $(X, \mathfrak{M})$ we just refer to $X$ as the measurable space.
@@ -296,7 +303,7 @@
 \begin{topic}{Existence of Completions}
 \remark If $(X, \mathfrak{M}, \mu)$ is a measure space, then define $\mathfrak{M}^*$ to be all $E \subseteq X$ such that $A \subseteq E \subseteq B$ for $A, B \in \mathfrak{M}$ such that $\mu(B \setminus A) = 0$. Defining $\mu(E) = \mu(A)$ makes $(X, \mathfrak{M}^*, \mu)$ a measure space,
 \remark The extended $\mu$ is \term{complete} as all subsets of negligible sets are measurable.
-\remark $\mathfrak{M}^*$ is the \term{$\mu$-completion} of $\mathfrak{M}$.
+\remark $\mathfrak{M}^*$ is the \term[mu-completion]{$\mu$-completion} of $\mathfrak{M}$.
 \end{topic}
 
 % 1.37
@@ -459,8 +466,8 @@ Let $\mu$ be a positive Borel measure and $E \subseteq X$ be Borel. Then:
 
 % 2.16
 \begin{topic}{Definition}
-\remark $E$ is \term{$\sigma$-compact} if it is the countable union of compact sets.
-\remark $E$ is \term{$\sigma$-finite} if it is the countable union of sets with finite measure.
+\remark $E$ is \term[sigma-compact]{$\sigma$-compact} if it is the countable union of compact sets.
+\remark $E$ is \term[sigma-finite]{$\sigma$-finite} if it is the countable union of sets with finite measure.
 \end{topic}
 
 % 2.17
@@ -485,10 +492,10 @@ Thus, every $E \in \mathfrak{M}$ is the union of an $F_\sigma$ and a negligible 
 
 % 2.19
 \begin{topic}{Euclidean Spaces}
-\remark $\mathbb{R}^k$ is the \term{$k$-dimension Euclidean space} with all the familiar operations.
+\remark $\mathbb{R}^k$ is the \term[k-dimension Euclidean space]{$k$-dimension Euclidean space} with all the familiar operations.
 \remark If $E \subseteq \mathbb{R}^k$ and $x \in \mathbb{R}^k$ then $E + x = \{ y + x : y \in E \}$ is a \term{translate} of $E$.
-\remark A \term{$k$-cell} is a set of the form $\{ (\xi_1, \ldots, \xi_k) \in \mathbb{R}^k : \alpha_i < \xi_i < \beta_i, 1 \leq i \leq k \}$. Either inequality may be replaced with $\leq$. The \term{volume} of a $k$-cell is $\vol(W) = \prod_{i=1}^k (\beta_i - \alpha_i)$.
-\remark If $a \in \mathbb{R}^k$ and $\delta > 0$ then a \term{$\delta$-box with corner at $a$} is $$Q(a, \delta) = \{ (\xi_1, \ldots, \xi_k) \in \mathbb{R}^k : \alpha_i \leq \xi_i < \alpha_i + \delta, 1 \leq i \leq k \}.$$
+\remark A \term[k-cell]{$k$-cell} is a set of the form $\{ (\xi_1, \ldots, \xi_k) \in \mathbb{R}^k : \alpha_i < \xi_i < \beta_i, 1 \leq i \leq k \}$. Either inequality may be replaced with $\leq$. The \term{volume} of a $k$-cell is $\vol(W) = \prod_{i=1}^k (\beta_i - \alpha_i)$.
+\remark If $a \in \mathbb{R}^k$ and $\delta > 0$ then a \term[delta-box with corner at a]{$\delta$-box with corner at $a$} is $$Q(a, \delta) = \{ (\xi_1, \ldots, \xi_k) \in \mathbb{R}^k : \alpha_i \leq \xi_i < \alpha_i + \delta, 1 \leq i \leq k \}.$$
 \remark If $P_n$ are points whose coordinates are multiples of $2^{-n}$ and $\Omega_n$ are the $2^{-n}$ boxes with corners at the elements of $P_n$ then we use the following properties:
 \begin{itemize}
 \item $\Omega_n$ covers $\mathbb{R}^k$ disjointly.
@@ -599,7 +606,7 @@ For this section, let $X$ be arbitrary and $\mu$ a positive measure.
 
 % 3.6
 \begin{topic}{Definition}
-\remark If $0 \leq p \leq \infty$ and $f$ is a complex measurable function, then the \term{$L^p$-norm} of $f$ is $$\|f\|_p = \left\{\int_X |f|^p\,d\mu\right\}^{1/p}.$$ $L^p(\mu)$ is the collection of all $f$ for which $\|f\|_p < \infty$ and is called the \term{$L^p$-space} of $X$.
+\remark If $0 \leq p \leq \infty$ and $f$ is a complex measurable function, then the \term[L^p-norm]{$L^p$-norm} of $f$ is $$\|f\|_p = \left\{\int_X |f|^p\,d\mu\right\}^{1/p}.$$ $L^p(\mu)$ is the collection of all $f$ for which $\|f\|_p < \infty$ and is called the \term[L^p-space]{$L^p$-space} of $X$.
 \remark If $u$ is the Lebesgue measure on $\mathbb{R}^k$ then we write $L^p(\mathbb{R}^k)$ instead of $L^p(\mu)$.
 \remark If $\mu$ is the counting measure on a countable set $A$ we denote the $L^p$-space by $\ell^p(A)$ or just $\ell^p$. $x \in \ell^p$ is a sequence $x = \{\xi_n\}$ and $$\|x\|_p = \left\{\sum_{n=1}^\infty |\xi|^p\right\}^{1/p}.$$
 \end{topic}
@@ -1019,7 +1026,7 @@ If $\{u_\alpha\}_{\alpha \in A}$ is a maximal orthonormal set in $H$ then $x \ma
 \begin{topic}{Riemann-Lebesgue Lemma}
 \remark For $f \in L^1(T)$ we associate $\hat{f} : Z \to \mathbb{C}$ defined by $$\hat{f}(n) = \dfrac{1}{2\pi} \int_{-\pi}^\pi f(t) e^{-int}\,dt.$$
 \remark $\hat{f}(n) \to 0$ as $n \to \infty$.
-\remark Let \term{$c_0$} be the space of all functions $\varphi : \mathbb{Z} \to \mathbb{C}$ with $\varphi(n) \to 0$ as $n \to \pm \infty$ with the norm $$\|\varphi\|_\infty = \sup \{|\varphi(n)| : n \in \mathbb{Z}\}.$$ $c_0$ is a Banach space; $c_0$ is nothing but $C_0(\mathbb{Z})$ when $\mathbb{Z}$ has the discrete topology.
+\remark Let \term[c0]{$c_0$} be the space of all functions $\varphi : \mathbb{Z} \to \mathbb{C}$ with $\varphi(n) \to 0$ as $n \to \pm \infty$ with the norm $$\|\varphi\|_\infty = \sup \{|\varphi(n)| : n \in \mathbb{Z}\}.$$ $c_0$ is a Banach space; $c_0$ is nothing but $C_0(\mathbb{Z})$ when $\mathbb{Z}$ has the discrete topology.
 \end{topic}
 
 % 5.15
